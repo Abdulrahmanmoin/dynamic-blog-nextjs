@@ -6,6 +6,12 @@ import imageUrlBuilder from '@sanity/image-url';
 import BlogCard from './BlogCard';
 import Link from 'next/link';
 
+interface ObjInterface {
+    _id: string,
+    name: string,
+    previewText: string,
+    mainImage: { asset: string }
+}
 
 export default function ReadBlogsSec() {
 
@@ -18,9 +24,8 @@ export default function ReadBlogsSec() {
 
         const fetchingData = async () => {
             try {
-                let res = await client.fetch(`*[_type == 'blog']`)
+                const res = await client.fetch(`*[_type == 'blog']`)
                 setData(res)
-                // const res = await url.json();
                 console.log(res);
             } catch (error) {
                 console.log(error);
@@ -35,12 +40,12 @@ export default function ReadBlogsSec() {
         <div>
             <div className='xl:grid xl:grid-cols-2 gap-x-2 gap-y-4 space-y-4 xl:space-y-0 2xl:justify-center xl:py-10'>
                 {
-                    data.map((obj: any) => (
+                    data.map((obj: ObjInterface) => (
                         <>
-                           
-                            <Link href={`/blog/${obj._id}`} 
-                            key={obj._id}
-                            className='mt-5 xl:my-0 xl:mx-5'
+
+                            <Link href={`/blog/${obj._id}`}
+                                key={obj._id}
+                                className='mt-5 xl:my-0 xl:mx-5'
                             >
                                 <BlogCard
                                     title={obj.name}

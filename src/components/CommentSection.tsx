@@ -11,11 +11,13 @@ interface Comment {
   image: string
 }
 
+interface CommentText {
+  commentText: string
+}
 
 
 
-
-export default function CommentSection({commentText}: any) {
+export default function CommentSection({commentText}: CommentText) {
 
     const comments: Comment[] = [
         {
